@@ -30,23 +30,41 @@ PREMADE_DESIGNS = {
 def start(update, context):
     message = (
         "Welcome to InkStory Bot! 🤖📚\n\n"
-        "For writers & authors on Telegram, you can buy book cover designs instantly here.\n"
+        "Order your custom or premade book cover instantly — right here in Telegram!\n\n"
         "Type /help to see what I can do.\n\n"
-        "Or shop directly at: https://inkstorydesigns.com"
+        "Choose a book cover design option below to begin\n\n"
+        "*🛒 Custom Book Cover Design Options:*\n"
     )
-    update.message.reply_text(message)
+    for name, url in CUSTOM_DESIGNS.items():
+        message += f"• [{name}]({url})\n"
+
+    message += "\n*🧙 Premade Book Cover Design Options:*\n"
+    for name, url in PREMADE_DESIGNS.items():
+        message += f"• [{name}]({url})\n"
+
+    message += (
+        "\n*How it works:*\n"
+        "1. Tap an option above\n"
+        "2. Pay securely with Stripe\n"
+        "3. Complete the form after redirect\n\n"
+        "📬 Your cover will be delivered to your email (usually in 3–5 days).\n\n"
+        "Need help? Visit https://inkstorydesigns.com or email inkstorydesign@gmail.com"
+    )
+
+    update.message.reply_text(message, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 def help_command(update, context):
     message = (
         "*Available Commands:*\n"
         "/start - Show welcome message\n"
         "/help - Show this help info\n"
-        "/buy - View all book cover design packages\n\n"
+        "/buy - View all book cover design packages\n"
+        "/contact - Get support from Ink Story Designs\n\n"
         "*How to Buy:*\n"
         "1. Type /buy and tap a product\n"
         "2. Pay securely via Stripe\n"
         "3. Fill out the design order form after redirect\n\n"
-        "_Your book cover design will be emailed after completion (usually within around 3-5 days)._\n\n"
+        "_Your book cover design will be emailed after completion (usually within around 3–5 days)._\n\n"
         "Visit https://inkstorydesigns.com or email inkstorydesign@gmail.com for help."
     )
     update.message.reply_text(message, parse_mode=ParseMode.MARKDOWN)
@@ -70,6 +88,22 @@ def buy(update, context):
 
     update.message.reply_text(message, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
+def contact(update, context):
+    message = (
+        "*Available Commands:*\n"
+        "/start - Show welcome message\n"
+        "/help - Show this help info\n"
+        "/buy - View all book cover design packages\n"
+        "/contact - Get support from Ink Story Designs\n\n"
+        "*How to Buy:*\n"
+        "1. Type /buy and tap a product\n"
+        "2. Pay securely via Stripe\n"
+        "3. Fill out the design order form after redirect\n\n"
+        "_Your book cover design will be emailed after completion (usually within around 3–5 days)._\n\n"
+        "Visit https://inkstorydesigns.com/#contact or email inkstorydesign@gmail.com for help."
+    )
+    update.message.reply_text(message, parse_mode=ParseMode.MARKDOWN)
+
 def main():
     if not TELEGRAM_BOT_TOKEN:
         print("Error: TELEGRAM_BOT_TOKEN is not set.")
@@ -81,9 +115,10 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help_command))
     dp.add_handler(CommandHandler("buy", buy))
+    dp.add_handler(CommandHandler("contact", contact))
 
     updater.start_polling()
-    print("✅ InkStory Bot is running on Telegram...")
+    print("InkStory Bot is running on Telegram...")
     updater.idle()
 
 if __name__ == "__main__":

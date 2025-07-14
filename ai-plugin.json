@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "InkStory Book Cover API",
+  "name_for_model": "inkstory",
+  "description_for_human": "Order professional book cover designs via API.",
+  "description_for_model": "API to order custom or premade book covers. Users can pay, submit details, and receive final covers via email.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://inkstory-api.onrender.com/openapi.json",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://bookcoveralchemy.com/wp-content/uploads/2024/10/logo-circle.png",
+  "contact_email": "inkstorydesign@gmail.com",
+  "legal_info_url": "https://inkstorydesigns.com/terms"
+}
