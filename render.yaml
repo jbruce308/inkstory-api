@@ -3,5 +3,10 @@
     name: inkstory-api
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
-    plan: free
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+
+  - type: worker
+    name: inkstory-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python telegram/telegram_bot.py
