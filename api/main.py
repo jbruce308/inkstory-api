@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import RedirectResponse
 from fastapi.responses import FileResponse
 import stripe
@@ -20,6 +20,13 @@ if not stripe.api_key:
     raise ValueError("STRIPE_SECRET_KEY environment variable is not set!")
 
 app = FastAPI()
+
+
+@app.api_route("/", methods=["GET", "HEAD"])
+async def root(request: Request):
+    if request.method == "HEAD":
+        return Response(status_code=200)
+    return {"message": "Hello World"}
 
 # Add this route to serve the ai-plugin.json manifest at /.well-known/ai-plugin.json
 @app.get("/.well-known/ai-plugin.json")
