@@ -21,6 +21,15 @@ if not stripe.api_key:
 
 app = FastAPI()
 
+# Stripe webhook secret - used to verify Stripe event signatures
+STRIPE_WEBHOOK_SECRET = "we_1RlIF2Dwgsjml47rquPBXvhF"
+
+# Telegram bot token (replace with your actual token)
+TELEGRAM_BOT_TOKEN = "7619157567:AAHbfrWjZSDPw1oQ_h00Of3J6hKNf8w7f78"
+
+# Telegram API URL to send messages through your bot
+TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @app.api_route("/", methods=["GET", "HEAD"])
