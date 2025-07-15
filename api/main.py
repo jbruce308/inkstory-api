@@ -22,7 +22,7 @@ if not stripe.api_key:
 app = FastAPI()
 
 # Stripe webhook secret - used to verify Stripe event signatures
-STRIPE_WEBHOOK_SECRET = "we_1RlIF2Dwgsjml47rquPBXvhF"
+STRIPE_WEBHOOK_SECRET = "we_1RlIbjDwgsjml47rRhYAKwBM"
 
 # Telegram bot token (replace with your actual token)
 TELEGRAM_BOT_TOKEN = "7619157567:AAHbfrWjZSDPw1oQ_h00Of3J6hKNf8w7f78"
