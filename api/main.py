@@ -21,6 +21,7 @@ if not stripe.api_key:
 
 app = FastAPI()
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @app.api_route("/", methods=["GET", "HEAD"])
 async def root(request: Request):
@@ -31,7 +32,7 @@ async def root(request: Request):
 # Add this route to serve the ai-plugin.json manifest at /.well-known/ai-plugin.json
 @app.get("/.well-known/ai-plugin.json")
 def serve_plugin_manifest():
-    return FileResponse("ai-plugin.json")
+    return FileResponse(os.path.join("api","ai-plugin.json")
 
 SUCCESS_URL = "https://inkstorydesigns.com/#thanks-for-ordering"
 CANCEL_URL = "https://inkstorydesigns.com"
