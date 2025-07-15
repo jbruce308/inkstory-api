@@ -32,7 +32,7 @@ async def root(request: Request):
 # Add this route to serve the ai-plugin.json manifest at /.well-known/ai-plugin.json
 @app.get("/.well-known/ai-plugin.json")
 def serve_plugin_manifest():
-    return FileResponse(os.path.join("api","ai-plugin.json")
+    return FileResponse(os.path.join(BASE_DIR, "ai-plugin.json"))
 
 SUCCESS_URL = "https://inkstorydesigns.com/#thanks-for-ordering"
 CANCEL_URL = "https://inkstorydesigns.com"
