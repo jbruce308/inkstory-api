@@ -5,29 +5,28 @@ from telegram import ParseMode
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-# Custom design products
-CUSTOM_DESIGNS = {
-    "Buy Custom eBook Cover Design – $499": "https://inkstory-api.onrender.com/buy/ebook-only",
-    "Buy Custom Print & eBook Cover Design – $699": "https://inkstory-api.onrender.com/buy/print-and-ebook",
-}
-
-# Premade design products
-PREMADE_DESIGNS = {
-    "3022 Premade Book Cover Design – $5,000": "https://inkstory-api.onrender.com/buy/3022",
-    "Dark Wizard Premade Book Cover Design – $3,900": "https://inkstory-api.onrender.com/buy/dark-wizard",
-    "Eternal Runes Premade Book Cover Design – $2,700": "https://inkstory-api.onrender.com/buy/eternal-runes",
-    "Oracle Premade Book Cover Design – $1,000": "https://inkstory-api.onrender.com/buy/oracle",
-    "Premade Book Cover Design #8 – $900": "https://inkstory-api.onrender.com/buy/premade-8",
-    "Premade Book Cover Design #7 – $1,100": "https://inkstory-api.onrender.com/buy/premade-7",
-    "Premade Book Cover Design #6 – $800": "https://inkstory-api.onrender.com/buy/premade-6",
-    "Premade Book Cover Design #5 – $990": "https://inkstory-api.onrender.com/buy/premade-5",
-    "Premade Book Cover Design #4 – $900": "https://inkstory-api.onrender.com/buy/premade-4",
-    "Premade Book Cover Design #3 – $1,200": "https://inkstory-api.onrender.com/buy/premade-3",
-    "Premade Book Cover Design #2 – $900": "https://inkstory-api.onrender.com/buy/premade-2",
-    "Premade Book Cover Design #1 – $600": "https://inkstory-api.onrender.com/buy/premade-1",
-}
-
 def start(update, context):
+    user_id = update.effective_user.id
+    custom_designs = {
+        "Buy Custom eBook Cover Design – $499": f"https://inkstory-api.onrender.com/buy/ebook-only?telegram_user_id={user_id}",
+        "Buy Custom Print & eBook Cover Design – $699": f"https://inkstory-api.onrender.com/buy/print-and-ebook?telegram_user_id={user_id}",
+    }
+
+    premade_designs = {
+        "3022 Premade Book Cover Design – $5,000": f"https://inkstory-api.onrender.com/buy/3022?telegram_user_id={user_id}",
+        "Dark Wizard Premade Book Cover Design – $3,900": f"https://inkstory-api.onrender.com/buy/dark-wizard?telegram_user_id={user_id}",
+        "Eternal Runes Premade Book Cover Design – $2,700": f"https://inkstory-api.onrender.com/buy/eternal-runes?telegram_user_id={user_id}",
+        "Oracle Premade Book Cover Design – $1,000": f"https://inkstory-api.onrender.com/buy/oracle?telegram_user_id={user_id}",
+        "Premade Book Cover Design #8 – $900": f"https://inkstory-api.onrender.com/buy/premade-8?telegram_user_id={user_id}",
+        "Premade Book Cover Design #7 – $1,100": f"https://inkstory-api.onrender.com/buy/premade-7?telegram_user_id={user_id}",
+        "Premade Book Cover Design #6 – $800": f"https://inkstory-api.onrender.com/buy/premade-6?telegram_user_id={user_id}",
+        "Premade Book Cover Design #5 – $990": f"https://inkstory-api.onrender.com/buy/premade-5?telegram_user_id={user_id}",
+        "Premade Book Cover Design #4 – $900": f"https://inkstory-api.onrender.com/buy/premade-4?telegram_user_id={user_id}",
+        "Premade Book Cover Design #3 – $1,200": f"https://inkstory-api.onrender.com/buy/premade-3?telegram_user_id={user_id}",
+        "Premade Book Cover Design #2 – $900": f"https://inkstory-api.onrender.com/buy/premade-2?telegram_user_id={user_id}",
+        "Premade Book Cover Design #1 – $600": f"https://inkstory-api.onrender.com/buy/premade-1?telegram_user_id={user_id}",
+    }
+
     message = (
         "Welcome to InkStory Bot! 🤖📚\n\n"
         "Order your custom or premade book cover instantly — right here in Telegram!\n\n"
@@ -35,11 +34,11 @@ def start(update, context):
         "Choose a book cover design option below to begin\n\n"
         "*🛒 Custom Book Cover Design Options:*\n"
     )
-    for name, url in CUSTOM_DESIGNS.items():
+    for name, url in custom_designs.items():
         message += f"• [{name}]({url})\n"
 
     message += "\n*🧙 Premade Book Cover Design Options:*\n"
-    for name, url in PREMADE_DESIGNS.items():
+    for name, url in premade_designs.items():
         message += f"• [{name}]({url})\n"
 
     message += (
@@ -70,12 +69,33 @@ def help_command(update, context):
     update.message.reply_text(message, parse_mode=ParseMode.MARKDOWN)
 
 def buy(update, context):
+    user_id = update.effective_user.id
+    custom_designs = {
+        "Buy Custom eBook Cover Design – $499": f"https://inkstory-api.onrender.com/buy/ebook-only?telegram_user_id={user_id}",
+        "Buy Custom Print & eBook Cover Design – $699": f"https://inkstory-api.onrender.com/buy/print-and-ebook?telegram_user_id={user_id}",
+    }
+
+    premade_designs = {
+        "3022 Premade Book Cover Design – $5,000": f"https://inkstory-api.onrender.com/buy/3022?telegram_user_id={user_id}",
+        "Dark Wizard Premade Book Cover Design – $3,900": f"https://inkstory-api.onrender.com/buy/dark-wizard?telegram_user_id={user_id}",
+        "Eternal Runes Premade Book Cover Design – $2,700": f"https://inkstory-api.onrender.com/buy/eternal-runes?telegram_user_id={user_id}",
+        "Oracle Premade Book Cover Design – $1,000": f"https://inkstory-api.onrender.com/buy/oracle?telegram_user_id={user_id}",
+        "Premade Book Cover Design #8 – $900": f"https://inkstory-api.onrender.com/buy/premade-8?telegram_user_id={user_id}",
+        "Premade Book Cover Design #7 – $1,100": f"https://inkstory-api.onrender.com/buy/premade-7?telegram_user_id={user_id}",
+        "Premade Book Cover Design #6 – $800": f"https://inkstory-api.onrender.com/buy/premade-6?telegram_user_id={user_id}",
+        "Premade Book Cover Design #5 – $990": f"https://inkstory-api.onrender.com/buy/premade-5?telegram_user_id={user_id}",
+        "Premade Book Cover Design #4 – $900": f"https://inkstory-api.onrender.com/buy/premade-4?telegram_user_id={user_id}",
+        "Premade Book Cover Design #3 – $1,200": f"https://inkstory-api.onrender.com/buy/premade-3?telegram_user_id={user_id}",
+        "Premade Book Cover Design #2 – $900": f"https://inkstory-api.onrender.com/buy/premade-2?telegram_user_id={user_id}",
+        "Premade Book Cover Design #1 – $600": f"https://inkstory-api.onrender.com/buy/premade-1?telegram_user_id={user_id}",
+    }
+
     message = "*🛒 Buy Custom Book Cover Design Packages:*\n"
-    for name, url in CUSTOM_DESIGNS.items():
+    for name, url in custom_designs.items():
         message += f"• [{name}]({url})\n"
 
     message += "\n*🧙 Buy Premade Book Cover Designs:*\n"
-    for name, url in PREMADE_DESIGNS.items():
+    for name, url in premade_designs.items():
         message += f"• [{name}]({url})\n"
 
     message += (
