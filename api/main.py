@@ -1,3 +1,4 @@
+# -*- coding: cp1252 -*-
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import RedirectResponse
@@ -105,7 +106,7 @@ PRODUCTS = {
     },
 }
 
-def create_session(product_name: str, product_data: dict):
+def create_session(product_name: str, product_data: dict, metadata: dict = None):
     stripe_product = {"name": product_name}
     if product_data.get("image_url"):
         stripe_product["images"] = [product_data["image_url"]]
@@ -123,6 +124,7 @@ def create_session(product_name: str, product_data: dict):
         mode="payment",
         success_url=SUCCESS_URL,
         cancel_url=CANCEL_URL,
+        metadata=metadata or {}
     )
     return session
 
@@ -132,71 +134,174 @@ def root():
 
 # Buy endpoints
 @app.get("/buy/ebook-only", response_model=BuyResponse)
-def buy_ebook_only():
-    session = create_session("Ebook Only Book Cover Design", PRODUCTS["ebook_only"])
+def buy_ebook_only(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Ebook Only Book Cover Design",
+        PRODUCTS["ebook_only"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/print-and-ebook", response_model=BuyResponse)
-def buy_print_and_ebook():
-    session = create_session("Print & Ebook Book Cover Design", PRODUCTS["print_and_ebook"])
+def buy_print_and_ebook(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Print & Ebook Book Cover Design",
+        PRODUCTS["print_and_ebook"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/3022", response_model=BuyResponse)
-def buy_3022():
-    session = create_session("3022 Premade Book Cover Design", PRODUCTS["3022"])
+def buy_3022(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "3022 Premade Book Cover Design",
+        PRODUCTS["3022"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/dark-wizard", response_model=BuyResponse)
-def buy_dark_wizard():
-    session = create_session("Dark Wizard Premade Book Cover Design", PRODUCTS["dark_wizard"])
+def buy_dark_wizard(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Dark Wizard Premade Book Cover Design",
+        PRODUCTS["dark_wizard"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/eternal-runes", response_model=BuyResponse)
-def buy_eternal_runes():
-    session = create_session("Eternal Runes Premade Book Cover Design", PRODUCTS["eternal_runes"])
+def buy_eternal_runes(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Eternal Runes Premade Book Cover Design",
+        PRODUCTS["eternal_runes"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/oracle", response_model=BuyResponse)
-def buy_oracle():
-    session = create_session("Oracle Premade Book Cover Design", PRODUCTS["oracle"])
+def buy_oracle(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Oracle Premade Book Cover Design",
+        PRODUCTS["oracle"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/premade-8", response_model=BuyResponse)
-def buy_premade_8():
-    session = create_session("Premade Book Cover Design #8", PRODUCTS["premade_8"])
+def buy_premade_8(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Premade Book Cover Design #8",
+        PRODUCTS["premade_8"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/premade-7", response_model=BuyResponse)
-def buy_premade_7():
-    session = create_session("Premade Book Cover Design #7", PRODUCTS["premade_7"])
+def buy_premade_7(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Premade Book Cover Design #7",
+        PRODUCTS["premade_7"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/premade-6", response_model=BuyResponse)
-def buy_premade_6():
-    session = create_session("Premade Book Cover Design #6", PRODUCTS["premade_6"])
+def buy_premade_6(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Premade Book Cover Design #6",
+        PRODUCTS["premade_6"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/premade-5", response_model=BuyResponse)
-def buy_premade_5():
-    session = create_session("Premade Book Cover Design #5", PRODUCTS["premade_5"])
+def buy_premade_5(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Premade Book Cover Design #5",
+        PRODUCTS["premade_5"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/premade-4", response_model=BuyResponse)
-def buy_premade_4():
-    session = create_session("Premade Book Cover Design #4", PRODUCTS["premade_4"])
+def buy_premade_4(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Premade Book Cover Design #4",
+        PRODUCTS["premade_4"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/premade-3", response_model=BuyResponse)
-def buy_premade_3():
-    session = create_session("Premade Book Cover Design #3", PRODUCTS["premade_3"])
+def buy_premade_3(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Premade Book Cover Design #3",
+        PRODUCTS["premade_3"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/premade-2", response_model=BuyResponse)
-def buy_premade_2():
-    session = create_session("Premade Book Cover Design #2", PRODUCTS["premade_2"])
+def buy_premade_2(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Premade Book Cover Design #2",
+        PRODUCTS["premade_2"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
 
 @app.get("/buy/premade-1", response_model=BuyResponse)
-def buy_premade_1():
-    session = create_session("Premade Book Cover Design #1", PRODUCTS["premade_1"])
+def buy_premade_1(request: Request):
+    telegram_user_id = request.query_params.get("telegram_user_id")
+    session = create_session(
+        "Premade Book Cover Design #1",
+        PRODUCTS["premade_1"],
+        metadata={"telegram_user_id": telegram_user_id} if telegram_user_id else None
+    )
     return RedirectResponse(session.url)
+
+# Stripe Webhook for Telegram Thank-You Message
+@app.post("/stripe-webhook")
+async def stripe_webhook(request: Request, stripe_signature: str = Header(None)):
+    payload = await request.body()
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, stripe_signature, STRIPE_WEBHOOK_SECRET
+        )
+    except stripe.error.SignatureVerificationError:
+        raise HTTPException(status_code=400, detail="Invalid Stripe signature")
+
+    if event["type"] == "checkout.session.completed":
+        session = event["data"]["object"]
+        telegram_user_id = session.get("metadata", {}).get("telegram_user_id")
+
+        if telegram_user_id:
+            message = (
+                "Thank you for your order!\n\n"
+                "Next fill out a book cover order form here https://inkstorydesigns.com/#book-cover-design-order-form\n\n
+                "We're getting started on your book cover now. We'll email it you within 3–5 days after it is finished.\n\n"
+                "If you have any questions, just reply here."
+            )
+
+            async with httpx.AsyncClient() as client:
+                telegram_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+                await client.post(
+                    telegram_url,
+                    json={"chat_id": telegram_user_id, "text": message}
+                )
+
+    return {"status": "success"}
