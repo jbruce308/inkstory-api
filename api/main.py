@@ -1,6 +1,6 @@
 # -*- coding: cp1252 -*-
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request, Response, Header
+from fastapi import FastAPI, Request, Response, Header, HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.responses import FileResponse
 import stripe
