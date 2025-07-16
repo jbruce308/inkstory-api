@@ -276,7 +276,7 @@ def buy_premade_1(request: Request):
 
 # Stripe Webhook for Telegram Thank-You Message
 @app.post("/stripe-webhook")
-async def stripe_webhook(request: Request, stripe_signature: str = Header(None)):
+async def stripe_webhook(request: Request, stripe_signature: str = Header(None, alias="Stripe-Signature")):
     payload = await request.body()
 
     try:
