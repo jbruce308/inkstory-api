@@ -1,6 +1,6 @@
 # -*- coding: cp1252 -*-
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, Header
 from fastapi.responses import RedirectResponse
 from fastapi.responses import FileResponse
 import stripe
@@ -292,7 +292,7 @@ async def stripe_webhook(request: Request, stripe_signature: str = Header(None))
         if telegram_user_id:
             message = (
                 "Thank you for your order!\n\n"
-                "Next fill out a book cover order form here https://inkstorydesigns.com/#book-cover-design-order-form\n\n
+                "Next fill out a book cover order form here https://inkstorydesigns.com/#book-cover-design-order-form\n\n"
                 "We're getting started on your book cover now. We'll email it you within 3–5 days after it is finished.\n\n"
                 "If you have any questions, just reply here."
             )
