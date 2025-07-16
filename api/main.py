@@ -6,6 +6,7 @@ from fastapi.responses import FileResponse
 import stripe
 import os
 from pydantic import BaseModel
+import httpx
 
 class BuyResponse(BaseModel):
     url: str
